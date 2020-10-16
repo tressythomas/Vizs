@@ -1,36 +1,32 @@
 #
 # This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# the 'Run App' in R Studio.
+ 
 
 library(shiny)
 library(ggplot2)
 library(ggthemes)
 
-# Define UI for application that draws a histogram
+# Define UI for application that draws a scatterplot
 ui <- fluidPage(
 
     # Application title
     titlePanel("Oh, the iris again! Check correlation"),
 
-    # Sidebar with a slider input for number of bins 
+    # Dropdown from which the variables can be selected 
     selectInput("variable1", "Select Variable1:",c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width","Species")),
     selectInput("variable2", "Select Variable1:",c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width","Species")),
 
-        # Show a plot of the generated distribution
+        # Show a plot  
         mainPanel(
            plotOutput("scatterPlot")
         )
 )
-# Define server logic required to draw a histogram
+# Define server logic required to draw a scatterplot
 server <- function(input, output) {
 
     output$scatterPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
+        # generate vars based on input$variable* from ui.R
         x    <- iris[,c(input$variable1)]
         y    <- iris[,c(input$variable2)]
         
